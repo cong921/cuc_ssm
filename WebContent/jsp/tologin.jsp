@@ -3,14 +3,80 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css">
 <script src="${pageContext.request.contextPath }/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/login.js" ></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css">
 <script src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath }/js/user/login.js" type="text/javascript"></script>
-<title>Insert title here</title>
+<title>云课堂</title>
 </head>
 <body style="margin: 50px">
-	<div class="container">
+	<nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+					<div class="navbar-header">
+
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#" style="margin-left: 100px">云课堂</a>
+					</div>
+
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li class="active" style="margin-left: 50px"><a href="#">课程</a></li>
+							<li><a href="#">广场</a></li>
+							<!-- <li class="dropdown">
+							 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong class="caret"></strong></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="#">Action</a>
+								</li>
+								<li>
+									<a href="#">Another action</a>
+								</li>
+								<li>
+									<a href="#">Something else here</a>
+								</li>
+								<li class="divider">
+								</li>
+								<li>
+									<a href="#">Separated link</a>
+								</li>
+								<li class="divider">
+								</li>
+								<li>
+									<a href="#">One more separated link</a>
+								</li>
+							</ul>
+						</li> -->
+						</ul>
+						<!-- 	<form class="navbar-form navbar-left" role="search">
+						<div class="form-group">
+							<input type="text" class="form-control">
+						</div> 
+						<button type="submit" class="btn btn-default">
+							Submit
+						</button>
+					</form> -->
+						<ul class="nav navbar-nav navbar-right" style="margin-right: 200px; padding-right: 200px">
+							<li><a href="#">登录</a></li>
+							<li><a data-toggle="modal" data-target="#myModal">注册</a></li>
+							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">用户名<strong class="caret"></strong></a>
+								<ul class="dropdown-menu">
+									<li><a href="#">修改密码</a></li>
+									<li><a href="#">退出登录</a></li>
+									<!-- <li>
+									<a href="#">Something else here</a>
+								</li>
+								<li class="divider">
+								</li>
+								<li>
+									<a href="#">Separated link</a>
+								</li> -->
+								</ul></li>
+						</ul>
+					</div>
+
+				</nav>
+	<div class="container" style="margin-top: 80px">
 		<div class="row clearfix">
 			<div class="col-sm-offset-3 col-md-7 column">
 				<div class="carousel slide" id="carousel-926840">
@@ -79,8 +145,8 @@
 						<!-- 按钮触发模态框 -->
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
-								<input id="enter" type="button" class="btn btn-primary btn-lg col-sm-offset-2" value="登录" />
-								<button class="btn btn-primary btn-lg col-sm-offset-3" data-toggle="modal" data-target="#myModal">注册</button>
+								<input id="enter" type="button" class="btn btn-primary btn-lg col-sm-offset-5" value="登录" />
+								<!-- <button class="btn btn-primary btn-lg col-sm-offset-3" data-toggle="modal" data-target="#myModal">注册</button> -->
 							</div>
 						</div>
 
@@ -93,33 +159,33 @@
 										<h4 class="modal-title" id="myModalLabel">用户注册</h4>
 									</div>
 									<div class="modal-body" style="margin: 50px">
-										<form class="form-horizontal" role="form">
+										<form class="form-horizontal" role="form" id="regist_id">
 											<div class="form-group">
 												<label for="inputEmail3" class="col-sm-3 control-label">用户名</label>
 												<div class="col-sm-9">
-													<input type="username" class="form-control" id="inputEmail3" placeholder="" />
+													<input type="text" class="form-control" name="userName" id="username_id" placeholder="" />
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="inputPassword3" class="col-sm-3 control-label">密码</label>
 												<div class="col-sm-9">
-													<input type="password" class="form-control" id="inputPassword3" placeholder="" value="" />
+													<input type="password" class="form-control" id="password_id" name="password" placeholder="" value="" />
 												</div>
 											</div>
 											<div class="form-group" >
 												<label for="inputPassword3" class="col-sm-3 control-label">重复密码</label>
 												<div class="col-sm-9">
-													<input type="password" class="form-control" id="inputPassword3" placeholder="" value="" />
+													<input type="password" class="form-control" id="repassword"  placeholder="" value="" />
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="inputPassword3" class="col-sm-3 control-label">姓名</label>
 												<div class="col-sm-9">
-													<input type="password" class="form-control" id="inputPassword3" placeholder="" value="" />
+													<input type="text" class="form-control" id="name_id" placeholder="" value="" />
 												</div>
 											</div>
 											<div class="form-group" >
-												<label for="inputPassword3" class="col-sm-3 control-label">性别</label>
+												<label for="inputPassword3" class="col-sm-3 control-label" id="sex">性别</label>
 												<div class="col-sm-9">
 													<div class="raw">
 														<label for="inputEmail3" class="col-sm-1 control-label">男</label>
@@ -135,9 +201,9 @@
 												</div>
 											</div>
 											<div class="form-group">
-												<label for="inputPassword3" class="col-sm-3 control-label">年龄</label>
+												<label for="inputPassword3" class="col-sm-3 control-label" >年龄</label>
 												<div class="col-sm-9">
-													<input type="password" class="form-control" id="inputPassword3" placeholder="" value="" />
+													<input type="text" class="form-control" id="age_id" name="age" placeholder="" value="" />
 												</div>
 											</div>
 											<div class="form-group">
@@ -156,7 +222,7 @@
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-										<button type="button" class="btn btn-primary">注册</button>
+										<button type="button" class="btn btn-primary" id="registBtn">注册</button>
 									</div>
 								</div>
 								<!-- /.modal-content -->
@@ -171,52 +237,8 @@
 			</div>
 		</div>
 	</div>
-
-
 	<script type="text/javascript">
-		$("#enter").click(function() {
-			var username = $("#inputEmail3").val();
-			var password = $("#inputPassword3").val();
-			var drag_text = $(".drag_text").text();
-			var ip = $("#ip").val();
-			if (username == null || username == "") {
-				alert("用户名不能为空");
-				return;
-			}
-			if (password == null || password == "") {
-				alert("密码不能为空");
-				return;
-			}
-
-			$.ajax({
-				url : "${pageContext.request.contextPath}/login",
-				type : "POST",
-				dataType : "json",
-				data : {
-					"username" : username,
-					"password" : password
-				},
-				/* beforeSend:function(){
-					$("#enter").css("background","url(${pageContext.request.contextPath}/imgtwo/login/denglu-dengluzhong.png");
-					//$(".loading").css("display","block");
-				}, */
-				success : function(data, textStatus) {
-					if (!data.flag) {
-						alert("用户名或密码错误");
-
-					} else {
-						window.location.href = "http://www.baidu.com";//${pageContext.request.contextPath}/
-					}
-				},
-				error : function(XMLHttpRequest, textStatus, errorThrown) {
-					alert("服务器异常");
-				},
-			/* complete:function(){
-				$(".enter").css("background","url(${pageContext.request.contextPath}/imgtwo/login/denglu-denglu.png");
-				//$(".loading").css("display","none");
-			} */
-			})
-		})
+		var path="${pageContext.request.contextPath}";
 	</script>
 </body>
 </html>

@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap-responsive.min.css">
 <script src="${pageContext.request.contextPath }/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
-<title>Insert title here</title>
+<title>云课堂</title>
 </head>
 <body>
 	<div class="container-fluid">

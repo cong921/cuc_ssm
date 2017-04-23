@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,15 +30,14 @@ public class UserController {
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Boolean> login(@RequestParam String username, @RequestParam String password,
-			Model model) {
-		System.out.println(username);
-		System.out.println(password);
+			Model model,HttpSession session) {
 		List<User> list = userService.selectUserByUsernameAndPassword(username, password);
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		if (list.size() == 0) {
 			map.put("flag", false);
 
 		} else {
+			session.setAttribute("username", username);
 			map.put("flag", true);
 		}
 		return map;
@@ -55,7 +54,6 @@ public class UserController {
 	@ResponseBody
 	public void deleteUserById(@PathVariable Integer id) {
 		userService.deleteUserById(id);
-		;
 	}
 
 	@RequestMapping(value = "selectUserById/{id}", method = RequestMethod.GET)
@@ -66,15 +64,23 @@ public class UserController {
 
 	@RequestMapping(value = "saveUser", method = RequestMethod.POST)
 	@ResponseBody
-	public User saveUser(@RequestBody User user) {
+	public void saveUser(@RequestBody User user) {
 		userService.saveUser(user);
 		System.out.println(user);
-		return user;
 	}
 	@RequestMapping(value = "updateUser", method = RequestMethod.POST)
 	@ResponseBody
 	public void updateUser( @RequestBody User user) {
 		userService.updateUser(user);
+	}
+	@RequestMapping(value = "exit", method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView updateUser( HttpSession session) {
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("tologin");
+		session.removeAttribute("username");
+		return mv;
+		
 	}
 
 	/*
