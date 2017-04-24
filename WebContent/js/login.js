@@ -43,9 +43,18 @@ $(function(){
 		} */
 		})
 	})
+	$("#repassword").blur(function(){
+		var password = $("#password_id").val();
+		var repassword = $("#repassword").val();
+		if(password!=repassword){
+			alert("两次输入的密码不一致，请重新输入")
+		}
+	});
 	$("#registBtn").click(function() {
 		var username = $("#username_id").val();
 		var password = $("#password_id").val();
+		var repassword = $("#repassword").val();
+		
 		var age=$("#age_id").val();
 		if (username == null || username == "") {
 			alert("用户名不能为空");
@@ -55,24 +64,31 @@ $(function(){
 			alert("密码不能为空");
 			return;
 		}
+		if (repassword == null || repassword == "") {
+			alert("重复密码不能为空");
+			return;
+		}
+		if(password!=repassword){
+			alert("两次输入的密码不一致，请重新输入")
+		}
+		
 		
 		$.ajax({
 			url : path+"/saveUser",
 			type : "POST",
 			dataType : "json",
-			data : {"userName":username,
+			data : JSON.stringify({"userName":username,
 				"password":password,
-				"age":age},
-			"contentType": "application/json; charset=utf-8",
+				"age":age}),
+			contentType: "application/json; charset=utf-8",
 			/* beforeSend:function(){
 				$("#enter").css("background","url(${pageContext.request.contextPath}/imgtwo/login/denglu-dengluzhong.png");
 				//$(".loading").css("display","block");
 			}, */
 			success : function(data, textStatus) {
-				if (!data.flag) {
-					alert("注册成功！");
+				if(data.flag){
 					
-				} else {
+					alert("注册成功！");
 					window.location.href = path+"/index";//${pageContext.request.contextPath}/
 				}
 			},
@@ -83,6 +99,6 @@ $(function(){
 			$(".enter").css("background","url(${pageContext.request.contextPath}/imgtwo/login/denglu-denglu.png");
 			//$(".loading").css("display","none");
 		} */
-		})
-	})
+		});
+	});
 });

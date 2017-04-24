@@ -64,9 +64,12 @@ public class UserController {
 
 	@RequestMapping(value = "saveUser", method = RequestMethod.POST)
 	@ResponseBody
-	public void saveUser(@RequestBody User user) {
+	public Map<String,Boolean> saveUser(@RequestBody User user) {
 		userService.saveUser(user);
-		System.out.println(user);
+		System.out.println(user.getUserName());
+		Map<String,Boolean> map=new HashMap<String,Boolean>();
+		map.put("flag", true);
+		return map;
 	}
 	@RequestMapping(value = "updateUser", method = RequestMethod.POST)
 	@ResponseBody
