@@ -85,6 +85,16 @@ public class UserController {
 		return mv;
 		
 	}
+	@RequestMapping(value = "toedit/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView toedit(@PathVariable Integer id) {
+		List<User> user = userService.queryById(id);
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("regist");
+		mv.addObject("user",user);
+		return mv;
+		
+	}
 
 	/*
 	 * @RequestMapping("") public ModelAndView handleRequest(HttpServletRequest
