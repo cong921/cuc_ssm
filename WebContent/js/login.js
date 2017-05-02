@@ -87,7 +87,7 @@ $(function(){
 			}, */
 			success : function(data, textStatus) {
 				if(data.flag){
-					
+					if($("#registBtn").val()=="添加用户") alert("添加成功");
 					alert("注册成功！");
 					window.location.href = path+"/index";//${pageContext.request.contextPath}/
 				}

@@ -52,8 +52,13 @@ public class UserController {
 
 	@RequestMapping(value = "deleteUserById/{id}", method = RequestMethod.GET)
 	@ResponseBody
-	public void deleteUserById(@PathVariable Integer id) {
+	public ModelAndView deleteUserById(@PathVariable Integer id) {
 		userService.deleteUserById(id);
+		ModelAndView mv=new ModelAndView();
+		List<User> list = userService.selectAllUser();
+		mv.addObject(list);
+		mv.setViewName("index");
+		return mv;
 	}
 
 	@RequestMapping(value = "selectUserById/{id}", method = RequestMethod.GET)
@@ -73,12 +78,15 @@ public class UserController {
 	}
 	@RequestMapping(value = "updateUser", method = RequestMethod.POST)
 	@ResponseBody
-	public void updateUser( @RequestBody User user) {
+	public  Map<String,Boolean> updateUser( @RequestBody User user) {
 		userService.updateUser(user);
+		Map<String,Boolean> map=new HashMap<String,Boolean>();
+		map.put("flag", true);
+		return map;
 	}
 	@RequestMapping(value = "exit", method = RequestMethod.GET)
 	@ResponseBody
-	public ModelAndView updateUser( HttpSession session) {
+	public ModelAndView exit( HttpSession session) {
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("tologin");
 		session.removeAttribute("username");
@@ -90,7 +98,7 @@ public class UserController {
 	public ModelAndView toedit(@PathVariable Integer id) {
 		List<User> user = userService.queryById(id);
 		ModelAndView mv=new ModelAndView();
-		mv.setViewName("regist");
+		mv.setViewName("edit");
 		mv.addObject("user",user);
 		return mv;
 		

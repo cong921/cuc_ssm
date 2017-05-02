@@ -4,15 +4,15 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap-responsive.min.css">
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/scripts.js"></script>
-	<script src="js/login.js"></script>
+	<script src="${pageContext.request.contextPath }/js/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath }/js/scripts.js"></script>
+	<script src="${pageContext.request.contextPath }/js/login.js"></script>
 <title>云课堂</title>
 </head>
 <body>
@@ -298,7 +298,7 @@
 											+ data[i].password + '</td><td>'
 											+ data[i].age+"</td><td>"
 											+ "<input type='button' class='btn btn-primary' value='修改' onclick=window.location.href='${pageContext.request.contextPath}/toedit/"+data[i].id+"' >"+"</td><td>"
-											+ "<input type='button' class='btn btn-danger' value='删除' onclick=window.location.href='${pageContext.request.contextPath}/todelete >"+"</td><td>"
+											+ "<input type='button' class='btn btn-danger' value='删除' onclick=window.location.href='${pageContext.request.contextPath}/deleteUserById/"+data[i].id+"' >"+"</td><td>"
 											
 											+ '</tr>');
 						} else if (i % 4 == 1) {
@@ -308,7 +308,7 @@
 											+ data[i].password + '</td><td>'
 											+ data[i].age+"</td><td>"
 											+ "<input type='button' class='btn btn-primary' value='修改'  onclick=window.location.href='${pageContext.request.contextPath}/toedit/"+data[i].id+"' >"+"</td><td>"
-											+ "<input type='button' class='btn btn-danger' value='删除' onclick=window.location.href='${pageContext.request.contextPath}/todelete >"+"</td><td>"
+											+ "<input type='button' class='btn btn-danger' value='删除' onclick=window.location.href='${pageContext.request.contextPath}/deleteUserById/"+data[i].id+"' >"+"</td><td>"
 											+ '</tr>');
 
 						} else if (i % 4 == 2) {
@@ -318,7 +318,7 @@
 											+ data[i].password + '</td><td>'
 											+ data[i].age+"</td><td>"
 											+ "<input type='button' class='btn btn-primary' value='修改' onclick=window.location.href='${pageContext.request.contextPath}/toedit/"+data[i].id+"' >"+"</td><td>"
-											+ "<input type='button' class='btn btn-danger' value='删除' onclick=window.location.href='${pageContext.request.contextPath}/todelete/"+data[i]+"' >"+"</td><td>"
+											+ "<input type='button' class='btn btn-danger' value='删除' onclick=window.location.href='${pageContext.request.contextPath}/deleteUserById/"+data[i].id+"' >"+"</td><td>"
 											+ '</tr>');
 
 						} else {
@@ -328,7 +328,7 @@
 											+ data[i].password + '</td><td>'
 											+ data[i].age+"</td><td>"
 											+ "<input type='button' class='btn btn-primary' value='修改'  onclick=window.location.href='${pageContext.request.contextPath}/toedit/"+data[i].id+"' >"+"</td><td>"
-											+ "<input type='button' class='btn btn-danger' value='删除' onclick=window.location.href='${pageContext.request.contextPath}/todelete >"+"</td><td>"
+											+ "<input type='button' class='btn btn-danger' value='删除' onclick=window.location.href='${pageContext.request.contextPath}/deleteUserById/"+data[i].id+"'  >"+"</td><td>"
 											+ '</tr>');
 
 						}

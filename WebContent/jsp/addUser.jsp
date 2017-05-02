@@ -72,7 +72,7 @@
 				<div class="">
 					<div class="col-sm-offset-2 col-sm-10">
 
-						<button id="registBtn" class="btn btn-success">新增用户</button>
+						<button id="registBtn" class="btn btn-success">添加用户</button>
 						
 					</div>
 				</div>
