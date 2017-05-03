@@ -9,10 +9,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap-responsive.min.css">
-	<script src="${pageContext.request.contextPath }/js/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath }/js/scripts.js"></script>
-	<script src="${pageContext.request.contextPath }/js/login.js"></script>
+<script src="${pageContext.request.contextPath }/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/scripts.js"></script>
+<script src="${pageContext.request.contextPath }/js/login.js"></script>
 <title>云课堂</title>
 </head>
 <body>
@@ -172,7 +172,7 @@
 									</div>
 
 
-								<script type="text/javascript">
+									<script type="text/javascript">
 									var path="${pageContext.request.contextPath}";
 								</script>
 
@@ -241,8 +241,8 @@
 					<div class="col-md-4"></div>
 					<div class="col-md-4">
 						<ul class="pagination pagination-lg">
-							<li ><a href="#" id="last_page">上一页</a></li>
-							<li class="active"><a href="#" >1</a></li>
+							<li><a href="#" id="last_page">上一页</a></li>
+							<li class="active"><a href="#">1</a></li>
 							<li><a href="#">2</a></li>
 							<li><a href="#">3</a></li>
 							<li><a href="#">4</a></li>
@@ -268,9 +268,47 @@
 		</div>
 	</div>
 
+	<!-- 信息删除确认 -->
+	<div class="modal fade" id="delcfmModel">
+		<div class="modal-dialog">
+			<div class="modal-content message_align">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title">提示信息</h4>
+				</div>
+				<div class="modal-body">
+					<p>您确认要删除吗？</p>
+				</div>
+				<div class="modal-footer">
+					<input type="hidden" id="url" />
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<a onclick="urlSubmit()" class="btn btn-success" data-dismiss="modal">确定</a>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
 
 	<script type="text/javascript">
+	function delcfm(url) {  
+	      $('#url').val(url);//给会话中的隐藏属性URL赋值  
+	      $('#delcfmModel').modal();  
+	}  ;
+	function urlSubmit(){  
+		   var url=$.trim($("#url").val());//获取会话中的隐藏属性URL  
+		   window.location.href="${pageContext.request.contextPath}/deleteUserById/"+url;    
+		}  ;
 		$(function() {
+			$("#deleteBtn").click(function(){
+				/* delcfm(url); */
+				alert(data[i].id);
+			});
+			
+			
 			$.ajax({
 				url : "${pageContext.request.contextPath}/findAllUser",
 				type : "GET",
@@ -298,7 +336,7 @@
 											+ data[i].password + '</td><td>'
 											+ data[i].age+"</td><td>"
 											+ "<input type='button' class='btn btn-primary' value='修改' onclick=window.location.href='${pageContext.request.contextPath}/toedit/"+data[i].id+"' >"+"</td><td>"
-											+ "<input type='button' class='btn btn-danger' value='删除' onclick=window.location.href='${pageContext.request.contextPath}/deleteUserById/"+data[i].id+"' >"+"</td><td>"
+											+ "<input type='button' id='deleteBtn' class='btn btn-danger' value='删除' onclick='delcfm("+data[i].id+")'  >"+"</td><td>"
 											
 											+ '</tr>');
 						} else if (i % 4 == 1) {
@@ -308,7 +346,8 @@
 											+ data[i].password + '</td><td>'
 											+ data[i].age+"</td><td>"
 											+ "<input type='button' class='btn btn-primary' value='修改'  onclick=window.location.href='${pageContext.request.contextPath}/toedit/"+data[i].id+"' >"+"</td><td>"
-											+ "<input type='button' class='btn btn-danger' value='删除' onclick=window.location.href='${pageContext.request.contextPath}/deleteUserById/"+data[i].id+"' >"+"</td><td>"
+											//+ "<input type='button' class='btn btn-danger' value='删除' onclick=window.location.href='${pageContext.request.contextPath}/deleteUserById/"+data[i].id+"' >"+"</td><td>"
+											+ "<input type='button' id='deleteBtn' class='btn btn-danger' value='删除' onclick='delcfm("+data[i].id+")'  >"+"</td><td>"
 											+ '</tr>');
 
 						} else if (i % 4 == 2) {
@@ -318,7 +357,8 @@
 											+ data[i].password + '</td><td>'
 											+ data[i].age+"</td><td>"
 											+ "<input type='button' class='btn btn-primary' value='修改' onclick=window.location.href='${pageContext.request.contextPath}/toedit/"+data[i].id+"' >"+"</td><td>"
-											+ "<input type='button' class='btn btn-danger' value='删除' onclick=window.location.href='${pageContext.request.contextPath}/deleteUserById/"+data[i].id+"' >"+"</td><td>"
+											//+ "<input type='button' class='btn btn-danger' value='删除' onclick=window.location.href='${pageContext.request.contextPath}/deleteUserById/"+data[i].id+"' >"+"</td><td>"
+											+ "<input type='button' id='deleteBtn' class='btn btn-danger' value='删除' onclick='delcfm("+data[i].id+")'  >"+"</td><td>"
 											+ '</tr>');
 
 						} else {
@@ -328,7 +368,8 @@
 											+ data[i].password + '</td><td>'
 											+ data[i].age+"</td><td>"
 											+ "<input type='button' class='btn btn-primary' value='修改'  onclick=window.location.href='${pageContext.request.contextPath}/toedit/"+data[i].id+"' >"+"</td><td>"
-											+ "<input type='button' class='btn btn-danger' value='删除' onclick=window.location.href='${pageContext.request.contextPath}/deleteUserById/"+data[i].id+"'  >"+"</td><td>"
+											//+ "<input type='button' class='btn btn-danger' value='删除' onclick=window.location.href='${pageContext.request.contextPath}/deleteUserById/"+data[i].id+"'  >"+"</td><td>"
+											+ "<input type='button' id='deleteBtn' class='btn btn-danger' value='删除' onclick='delcfm("+data[i].id+")'  >"+"</td><td>"
 											+ '</tr>');
 
 						}
