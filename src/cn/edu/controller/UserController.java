@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.github.pagehelper.PageInfo;
+
 import cn.edu.domain.User;
 import cn.edu.service.UserService;
 
@@ -43,10 +45,10 @@ public class UserController {
 		return map;
 	}
 
-	@RequestMapping(value = "findAllUser", method = RequestMethod.GET)
+	@RequestMapping(value = "findAllUser/{pages}", method = RequestMethod.GET)
 	@ResponseBody
-	public List<User> findAllUser() {
-		List<User> list = userService.selectAllUser();
+	public PageInfo<User> findAllUser(@PathVariable Integer pages) {
+		PageInfo<User> list = userService.selectAllUser(pages);
 		return list;
 	}
 
@@ -55,7 +57,7 @@ public class UserController {
 	public ModelAndView deleteUserById(@PathVariable Integer id) {
 		userService.deleteUserById(id);
 		ModelAndView mv=new ModelAndView();
-		List<User> list = userService.selectAllUser();
+		PageInfo<User> list = userService.selectAllUser(0);
 		mv.addObject(list);
 		mv.setViewName("index");
 		return mv;

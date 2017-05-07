@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import cn.edu.dao.UserMapper;
 import cn.edu.domain.User;
@@ -28,10 +30,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> selectAllUser() {
+	public PageInfo<User> selectAllUser(Integer rows) {
+		PageHelper.startPage(rows, 10);
 		UserExample example=new UserExample();
 		List<User> list = userMapper.selectByExample(example);
-		return list;
+		PageInfo<User> pageInfo=new PageInfo<User>(list);
+		System.out.println(pageInfo);
+		return pageInfo;
 	}
 
 	@Override

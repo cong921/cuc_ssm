@@ -238,19 +238,25 @@
 					</tbody>
 				</table>
 				<div class="row">
-					<div class="col-md-4"></div>
-					<div class="col-md-4">
+					<div class="col-md-3"></div>
+					<div class="col-md-5">
 						<ul class="pagination pagination-lg">
+							
+							
+							<li><a href="#" id="first_page">首页</a></li>
 							<li><a href="#" id="last_page">上一页</a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
+							<li><a href="#" id="page_status"></a></li>
+							
+						<!-- 	<li class="active"><a href="#">1</a></li>
+							<li><a href="#">1/2</a></li>
 							<li><a href="#">3</a></li>
 							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
+							<li><a href="#">5</a></li> -->
 							<li><a href="#" id="next_page">下一页</a></li>
+							<li><a href="#" id="tail_page">尾页</a></li>
 						</ul>
 						<script type="text/javascript">
-							$(function(){
+							/* $(function(){
 								$active=$("li.active a").innerHTML;
 								var $last=$("#last_page");
 								if($active==1)
@@ -258,7 +264,7 @@
 								$last.click(function(){
 									if($last.parent().siblings("a").innerHtml==1) alert(1);
 								});
-							});
+							}); */
 							
 						</script>
 					</div>
@@ -294,6 +300,44 @@
 	<!-- /.modal -->
 
 	<script type="text/javascript">
+			var pages=0;//总页数
+			var currentPage=1;//当前页
+			var rows=10;//每页显示条数
+			var total=0;
+	$("#first_page").click(function(){
+		if(currentPage==1)
+			return;
+				currentPage=1;
+				setVal(currentPage);
+			});		
+	$("#tail_page").click(function(){
+		if(currentPage==pages)
+			return;
+				currentPage=pages;
+				setVal(currentPage);
+			});		
+	$("#last_page").click(function(){
+		/* if($("ul.pagination  li.active").children("a")[0].innerHTML=="1")
+			return; */
+		$("ul.pagination  li.active").removeClass("active").prev().addClass("active");
+		if(currentPage==1)
+			return;
+		currentPage--;
+		setVal(currentPage);
+	});
+	$("#next_page").click(function(){
+		/* if($("ul.pagination  li.active").next().children("a")[0].innerHTML=="下一页")
+			return; */
+		$("ul.pagination  li.active").removeClass("active").next().addClass("active");
+		if(currentPage==pages)
+			return;
+		currentPage	++;
+		setVal(currentPage);
+	});
+	/* $("div ul.pagination li:gt(0):lt(5)").click(function(){
+		$("ul.pagination  li.active").removeClass("active");
+		$(this).addClass("active");
+	}); */
 	function delcfm(url) {  
 	      $('#url').val(url);//给会话中的隐藏属性URL赋值  
 	      $('#delcfmModel').modal();  
@@ -305,12 +349,15 @@
 		$(function() {
 			$("#deleteBtn").click(function(){
 				/* delcfm(url); */
-				alert(data[i].id);
+				alert(data.list[i].id);
 			});
 			
 			
+			setVal(currentPage);
+		});
+		function setVal(currentPage){
 			$.ajax({
-				url : "${pageContext.request.contextPath}/findAllUser",
+				url : "${pageContext.request.contextPath}/findAllUser/"+currentPage,
 				type : "GET",
 				dataType : "json",
 				/* data : {
@@ -322,54 +369,57 @@
 					//$(".loading").css("display","block");
 				}, */
 				success : function(data, textStatus) {
+					pages=data.pages;
+					$("#page_status")[0].innerHTML=currentPage+"/"+pages;
 					/* if (!data.flag) {
 						alert("用户名或密码错误");
 
 					} else {
 						window.location.href = "http://www.baidu.com";//${pageContext.request.contextPath}/
 					} */
-					for (var i = 0; i < data.length; i++) {
+					$("table tbody tr").remove();
+					for (var i = 0; i < data.list.length; i++) {
 						if (i % 4 == 0) {
 							$("table tbody").append(
 									'<tr class="danger" ><td>'
-											+ data[i].userName + '</td><td>'
-											+ data[i].password + '</td><td>'
-											+ data[i].age+"</td><td>"
-											+ "<input type='button' class='btn btn-primary' value='修改' onclick=window.location.href='${pageContext.request.contextPath}/toedit/"+data[i].id+"' >"+"</td><td>"
-											+ "<input type='button' id='deleteBtn' class='btn btn-danger' value='删除' onclick='delcfm("+data[i].id+")'  >"+"</td><td>"
+											+ data.list[i].userName + '</td><td>'
+											+ data.list[i].password + '</td><td>'
+											+ data.list[i].age+"</td><td>"
+											+ "<input type='button' class='btn btn-primary' value='修改' onclick=window.location.href='${pageContext.request.contextPath}/toedit/"+data.list[i].id+"' >"+"</td><td>"
+											+ "<input type='button' id='deleteBtn' class='btn btn-danger' value='删除' onclick='delcfm("+data.list[i].id+")'  >"+"</td><td>"
 											
 											+ '</tr>');
 						} else if (i % 4 == 1) {
 							$("table tbody").append(
 									'<tr class="active" ><td>'
-											+ data[i].userName + '</td><td>'
-											+ data[i].password + '</td><td>'
-											+ data[i].age+"</td><td>"
-											+ "<input type='button' class='btn btn-primary' value='修改'  onclick=window.location.href='${pageContext.request.contextPath}/toedit/"+data[i].id+"' >"+"</td><td>"
-											//+ "<input type='button' class='btn btn-danger' value='删除' onclick=window.location.href='${pageContext.request.contextPath}/deleteUserById/"+data[i].id+"' >"+"</td><td>"
-											+ "<input type='button' id='deleteBtn' class='btn btn-danger' value='删除' onclick='delcfm("+data[i].id+")'  >"+"</td><td>"
+											+ data.list[i].userName + '</td><td>'
+											+ data.list[i].password + '</td><td>'
+											+ data.list[i].age+"</td><td>"
+											+ "<input type='button' class='btn btn-primary' value='修改'  onclick=window.location.href='${pageContext.request.contextPath}/toedit/"+data.list[i].id+"' >"+"</td><td>"
+											//+ "<input type='button' class='btn btn-danger' value='删除' onclick=window.location.href='${pageContext.request.contextPath}/deleteUserById/"+data.list[i].id+"' >"+"</td><td>"
+											+ "<input type='button' id='deleteBtn' class='btn btn-danger' value='删除' onclick='delcfm("+data.list[i].id+")'  >"+"</td><td>"
 											+ '</tr>');
 
 						} else if (i % 4 == 2) {
 							$("table tbody").append(
 									'<tr class="success" ><td>'
-											+ data[i].userName + '</td><td>'
-											+ data[i].password + '</td><td>'
-											+ data[i].age+"</td><td>"
-											+ "<input type='button' class='btn btn-primary' value='修改' onclick=window.location.href='${pageContext.request.contextPath}/toedit/"+data[i].id+"' >"+"</td><td>"
-											//+ "<input type='button' class='btn btn-danger' value='删除' onclick=window.location.href='${pageContext.request.contextPath}/deleteUserById/"+data[i].id+"' >"+"</td><td>"
-											+ "<input type='button' id='deleteBtn' class='btn btn-danger' value='删除' onclick='delcfm("+data[i].id+")'  >"+"</td><td>"
+											+ data.list[i].userName + '</td><td>'
+											+ data.list[i].password + '</td><td>'
+											+ data.list[i].age+"</td><td>"
+											+ "<input type='button' class='btn btn-primary' value='修改' onclick=window.location.href='${pageContext.request.contextPath}/toedit/"+data.list[i].id+"' >"+"</td><td>"
+											//+ "<input type='button' class='btn btn-danger' value='删除' onclick=window.location.href='${pageContext.request.contextPath}/deleteUserById/"+data.list[i].id+"' >"+"</td><td>"
+											+ "<input type='button' id='deleteBtn' class='btn btn-danger' value='删除' onclick='delcfm("+data.list[i].id+")'  >"+"</td><td>"
 											+ '</tr>');
 
 						} else {
 							$("table tbody").append(
 									'<tr class="warnning" ><td>'
-											+ data[i].userName + '</td><td>'
-											+ data[i].password + '</td><td>'
-											+ data[i].age+"</td><td>"
-											+ "<input type='button' class='btn btn-primary' value='修改'  onclick=window.location.href='${pageContext.request.contextPath}/toedit/"+data[i].id+"' >"+"</td><td>"
-											//+ "<input type='button' class='btn btn-danger' value='删除' onclick=window.location.href='${pageContext.request.contextPath}/deleteUserById/"+data[i].id+"'  >"+"</td><td>"
-											+ "<input type='button' id='deleteBtn' class='btn btn-danger' value='删除' onclick='delcfm("+data[i].id+")'  >"+"</td><td>"
+											+ data.list[i].userName + '</td><td>'
+											+ data.list[i].password + '</td><td>'
+											+ data.list[i].age+"</td><td>"
+											+ "<input type='button' class='btn btn-primary' value='修改'  onclick=window.location.href='${pageContext.request.contextPath}/toedit/"+data.list[i].id+"' >"+"</td><td>"
+											//+ "<input type='button' class='btn btn-danger' value='删除' onclick=window.location.href='${pageContext.request.contextPath}/deleteUserById/"+data.list[i].id+"'  >"+"</td><td>"
+											+ "<input type='button' id='deleteBtn' class='btn btn-danger' value='删除' onclick='delcfm("+data.list[i].id+")'  >"+"</td><td>"
 											+ '</tr>');
 
 						}
@@ -388,7 +438,8 @@
 				//$(".loading").css("display","none");
 			} */
 			})
-		})
+			
+		};
 	</script>
 </body>
 </html>
