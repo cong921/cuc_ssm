@@ -90,7 +90,10 @@ $(function(){
 					if(document.getElementById("registBtn").innerHTML=="添加用户") alert("添加成功");
 					else{alert("注册成功！");}
 					window.location.href = path+"/index";//${pageContext.request.contextPath}/
+				}else{
+					alert("用户名已存在，请换个用户名");
 				}
+					
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
 				alert("服务器异常");

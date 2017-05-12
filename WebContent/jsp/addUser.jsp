@@ -29,7 +29,7 @@
 						<div class="col-sm-10">
 							<input type="text" class="form-control" name="userName" id="username_id" placeholder="" />
 						</div>
-					</div>
+					</div><span id="user_info"  style="display: none;margin-left: 120px;color: red">用户名已存在</span>
 					<div class="form-group">
 
 						<label for="inputPassword3" class="col-sm-2 control-label"> 密码 </label>
@@ -82,7 +82,37 @@
 	</div>
 	<%@include file="./home_bottom.jsp"%>
 	<script type="text/javascript">
-								var path = "${pageContext.request.contextPath}";
+								var path = "${pageContext.request.contextPath}";//$("#user_info").show();
+								$("#username_id").blur(function(){
+									$.ajax({
+										url : path+"/userExist",
+										type : "POST",
+										dataType : "json",
+										data : JSON.stringify({"userName":$("#username_id").val(),
+											}),
+										contentType: "application/json; charset=utf-8",
+										/* beforeSend:function(){
+											$("#enter").css("background","url(${pageContext.request.contextPath}/imgtwo/login/denglu-dengluzhong.png");
+											//$(".loading").css("display","block");
+										}, */
+										success : function(data, textStatus) {
+											if(data.flag){
+												$("#user_info").show();
+												$("#username_id").focus();
+											}else{
+												$("#user_info").hide();
+											}
+												
+										},
+										error : function(XMLHttpRequest, textStatus, errorThrown) {
+											alert("服务器异常");
+										},
+										/* complete:function(){
+										$(".enter").css("background","url(${pageContext.request.contextPath}/imgtwo/login/denglu-denglu.png");
+										//$(".loading").css("display","none");
+									} */
+									});
+								});
 						</script>
 </body>
 </html>

@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
 
+import cn.edu.common.UserExistException;
 import cn.edu.domain.User;
 import cn.edu.service.UserService;
 
@@ -72,7 +73,14 @@ public class UserController {
 	@RequestMapping(value = "saveUser", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Boolean> saveUser(@RequestBody User user) {
-		userService.saveUser(user);
+		try{
+			userService.saveUser(user);
+		} catch (UserExistException e) {
+			Map<String,Boolean> map=new HashMap<String,Boolean>();
+			e.printStackTrace();
+			map.put("flag", false);
+			return map;
+		}
 		System.out.println(user.getUserName());
 		Map<String,Boolean> map=new HashMap<String,Boolean>();
 		map.put("flag", true);
@@ -81,10 +89,29 @@ public class UserController {
 	@RequestMapping(value = "updateUser", method = RequestMethod.POST)
 	@ResponseBody
 	public  Map<String,Boolean> updateUser( @RequestBody User user) {
-		userService.updateUser(user);
+			userService.updateUser(user);
+		
 		Map<String,Boolean> map=new HashMap<String,Boolean>();
 		map.put("flag", true);
 		return map;
+	}
+	/**
+	 * 根据用户名判断用户是否存在
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping(value = "userExist", method = RequestMethod.POST)
+	@ResponseBody
+	public  Map<String,Boolean> userExist( @RequestBody User user) {
+		List<User> list=userService.queryUserByUsername(user);
+		Map<String,Boolean> map=new HashMap<String,Boolean>();
+		if(list.size()>0){
+			map.put("flag", true);
+			return map;
+		}
+		map.put("flag", false);
+		return map;
+		
 	}
 	@RequestMapping(value = "exit", method = RequestMethod.GET)
 	@ResponseBody

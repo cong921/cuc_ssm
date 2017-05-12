@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.abel533.entity.Example;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import cn.edu.common.UserExistException;
 import cn.edu.dao.UserMapper;
 import cn.edu.domain.User;
 import cn.edu.domain.UserExample;
@@ -40,7 +42,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void saveUser(User user) {
+	public void saveUser(User user) throws UserExistException {
+		UserExample example=new UserExample();
+		Criteria criteria=example.createCriteria();
+		criteria.andUserNameEqualTo(user.getUserName());
+		List<User> list = userMapper.selectByExample(example);
+		if(list.size()>0){
+				throw new  UserExistException("用户已存在");
+		}
 		userMapper.insertSelective(user);
 	}
 
@@ -68,6 +77,14 @@ public class UserServiceImpl implements UserService {
 	public void updateUser(User user) {
 		
 		 userMapper.updateByPrimaryKeySelective(user);
+	}
+
+	@Override
+	public List<User> queryUserByUsername(User user) {
+		UserExample example=new UserExample();
+		Criteria criteria=example.createCriteria();
+		criteria.andUserNameEqualTo(user.getUserName());
+		return userMapper.selectByExample(example);
 	}
 	
 	
