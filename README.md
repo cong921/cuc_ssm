@@ -1,7 +1,7 @@
 本项目是一个Spring、SpringMVC、mybatis框架整合的项目，实现了用户的增删改查，前端使用了bootstrap，并用echarts做了数据的展示。
 
 ## 安装/运行
-下载zip解压导入到eclipse中，用eclipse import - projects from git 
+下载zip解压导入到eclipse中，或用eclipse import - projects from git 
 
 ## 数据来源
 数据的来源是我用爬虫webmagic框架爬的聚币网 无限币 8月1日下午2点到5点左右的成交记录，并做了去重处理，去重结果为532条买卖记录，我所展示的是这段时间的买方的价格。
