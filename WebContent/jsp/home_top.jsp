@@ -5,7 +5,7 @@
 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-2" style="margin-top: 100px">
+		<!-- <div class="col-md-2" style="margin-top: 100px">
 			<div class="panel-group" id="panel-241717">
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -24,7 +24,8 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
+		<%@include file="./menu_left.jsp" %>
 		<div class="col-md-10">
 			<nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
 				<div class="navbar-header">
@@ -73,20 +74,21 @@
 						</button>
 					</form> -->
 					<ul class="nav navbar-nav navbar-right" style="margin-right: 200px; padding-right: 200px">
-						<li><a href="${pageContext.request.contextPath }/tologin">登录</a></li>
-						<li><a data-toggle="modal" data-target="#myModal">注册</a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">${sessionScope.username }<strong class="caret"></strong></a>
+						<%-- <li><a href="${pageContext.request.contextPath }/tologin">登录</a></li>
+						<li><a data-toggle="modal" data-target="#myModal">注册</a></li> --%>
+						<li><a class="warnning">欢迎您,</a></li>
+						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="current_user">${sessionScope.username }<strong class="caret"></strong></a>
 							<ul class="dropdown-menu">
-								<li><a href="#">修改密码</a></li>
+								<li><a href="#" data-target="#myModal" data-toggle="modal">修改密码</a></li>
 								<li><a href="${pageContext.request.contextPath }/exit">退出登录</a></li>
 							</ul></li>
 					</ul>
 				</div>
 
 			</nav>
-
+			<%@include file="./user_model.jsp" %>
 			<!-- 模态框（Modal） -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -143,9 +145,9 @@
 								</div>
 								<div class="form-group">
 									<div class="col-sm-offset-2 col-sm-10">
-										<!-- <div class="checkbox">
+										<div class="checkbox">
 									 <label><input type="checkbox" />Remember me</label>
-								</div> -->
+								</div>
 									</div>
 								</div>
 
@@ -160,7 +162,7 @@
 							<button type="button" class="btn btn-primary">注册</button>
 						</div>
 					</div>
-					<!-- /.modal-content -->
+					/.modal-content
 				</div>
-				<!-- /.modal -->
-			</div>
+				/.modal
+			</div> -->

@@ -1,6 +1,8 @@
 package cn.edu.domain;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
     private Integer id;
 
     private String userName;
@@ -8,8 +10,18 @@ public class User {
     private String password;
 
     private Integer age;
+    
+    private String email;
 
-    public Integer getId() {
+    public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Integer getId() {
         return id;
     }
 

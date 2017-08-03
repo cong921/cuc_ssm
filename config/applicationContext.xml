@@ -46,6 +46,15 @@
 		</property>
 	</bean>
 	
+	<!-- 开启shiro注解支持 -->
+	<bean id="defaultAdvisorAutoProxyCreator" class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator">
+		<!--  使用cglib为Action创建代理对象 -->
+		<property name="proxyTargetClass" value="true"/>
+	</bean>
+	<!-- 切面类 -->
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor"/>
+	
+	
 	
 	<!-- 通知 -->
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
@@ -61,5 +70,32 @@
 		<aop:advisor advice-ref="txAdvice" pointcut="execution(* cn.edu.service.*.*(..))"/>
 	</aop:config>
 	
-	
+	<bean id="ShiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager"/>
+		<property name="loginUrl" value="/tologin"/>
+		<property name="successUrl" value="/index.jsp"/>
+		<property name="unauthorizedUrl" value="/unauthorizedUrl.jsp"/>	
+		<property name="filterChainDefinitions">
+			<value>
+				<!--
+				/css/**=anon
+				/js/**=anon
+				/skin/**=anon
+				/fonts/**=anon
+				/Images/**=anon
+				/jsp/Images/**=anon
+				/jsp/tologin.jsp=anon
+				/login=anon
+				/tologin=anon
+				/** = authc
+				
+				-->
+				/** = anon
+			</value>
+		</property>	
+	</bean>
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="cucRealm"></property>
+	</bean>
+	<bean id="cucRealm" class="cn.edu.common.CucRealm"></bean>
 </beans>

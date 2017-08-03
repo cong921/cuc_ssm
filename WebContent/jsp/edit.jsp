@@ -12,6 +12,7 @@
 <script src="${pageContext.request.contextPath }/js/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath }/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath }/js/scripts.js"></script>
+	<script src="${pageContext.request.contextPath }/js/update_password.js"></script>
 <title>云课堂</title>
 </head>
 <body>
@@ -41,7 +42,7 @@
 						密码
 					</label>
 					<div class="col-sm-9">
-						<input type="password" class="form-control" i name="password" id="password" value="${user[0].password }" />
+						<input type="password" class="form-control" i name="password" id="password" value="" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -50,7 +51,9 @@
 						电子邮件
 					</label>
 					<div class="col-sm-9">
-						<input type="email" class="form-control" id="inputEmail3" />
+						<input type="email" class="form-control" id="email" name="email" value="${user[0].email }" 
+						onkeyup="(function() {var ea = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;(ea.test(this.value)) ? (this.v =this.value) : this.v = '';}).call(this)"
+						onblur="this.value=this.v;" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -85,8 +88,9 @@
 									var id=$("#user_id").val();
 									var username=$("#username").val();
 									var password=$("#password").val();
+									var email=$("#email").val();
 									var age=$("#age").val();
-									if((username&&password&&age)==""){
+									if((username&&password&&age&&email)==""){
 										alert("数据填写不完整"); 	
 									}else{
 
@@ -98,6 +102,7 @@
 											data : JSON.stringify({"id":id,
 												"userName":username,
 												"password":password,
+												"email":email,
 												"age":age}),
 												contentType: "application/json; charset=utf-8",
 											/* beforeSend:function(){

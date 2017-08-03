@@ -16,7 +16,54 @@
 <title>云课堂</title>
 </head>
 <body>
-	<%@include file="./home_top_only.jsp"%>
+	<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-2" style="margin-top: 100px">
+			<div class="panel-group" id="panel-241717">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-241717" href="#panel-element-636296">后台管理</a>
+					</div>
+					<div id="panel-element-636296" class="panel-collapse collapse">
+						<div class="panel-body">用户管理</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-241717" href="#panel-element-898159">用户中心</a>
+					</div>
+					<div id="panel-element-898159" class="panel-collapse collapse">
+						<div class="panel-body">我的课程</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-10">
+			<nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+				<div class="navbar-header">
+
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#" style="margin-left: 100px">云课堂</a>
+				</div>
+
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li class="active" style="margin-left: 50px"><a href="#">课程</a></li>
+						<li><a href="#">广场</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right" style="margin-right: 200px; padding-right: 200px">
+						<li><a class="warnning"">欢迎您,</a></li>
+						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">${sessionScope.username }<strong class="caret"></strong></a>
+							<ul class="dropdown-menu">
+								<!-- <li><a href="#">修改密码</a></li> -->
+								<li><a href="${pageContext.request.contextPath }/exit">退出登录</a></li>
+							</ul></li>
+					</ul>
+				</div>
+
+			</nav>
 
 	<div class="container-fluid" style="margin-top: 100px">
 		<div class="row">
@@ -48,7 +95,7 @@
 
 						<label for="inputEmail3" class="col-sm-2 control-label"> 电子邮件 </label>
 						<div class="col-sm-10">
-							<input type="email" class="form-control" id="inputEmail3" />
+							<input type="email" class="form-control" id="email" name="email" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -103,10 +150,7 @@
 												$("#user_info").hide();
 											}
 												
-										},
-										error : function(XMLHttpRequest, textStatus, errorThrown) {
-											alert("服务器异常");
-										},
+										}
 										/* complete:function(){
 										$(".enter").css("background","url(${pageContext.request.contextPath}/imgtwo/login/denglu-denglu.png");
 										//$(".loading").css("display","none");

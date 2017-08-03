@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageInfo;
 
+import cn.edu.common.OriginalPasswordWrongException;
 import cn.edu.common.UserExistException;
 import cn.edu.domain.User;
 @Service
@@ -18,4 +19,5 @@ public interface UserService {
 	public List<User> queryById(Integer id);
 	public void updateUser(User user);
 	public List<User> queryUserByUsername(User user);
+	public void updateUserByUsernameAndPassword(User user, String newpassword) throws OriginalPasswordWrongException;
 }
