@@ -18,14 +18,7 @@
 			<!-- 强制进行转码 -->
 		</init-param>
 	</filter>
-	<filter>
-		<filter-name>ShiroFilter</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>ShiroFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	
 	
 	<filter-mapping>
 		<filter-name>character</filter-name>
@@ -52,6 +45,16 @@
 	 <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
+    
+	<filter>
+		<filter-name>ShiroFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>ShiroFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	    
 	<!-- 加载spring的配置文件 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
