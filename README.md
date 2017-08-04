@@ -10,7 +10,7 @@
 权限控制使用的是shiro，实现了未授权用户不能随意对一些jsp和静态资源的访问。之后还可以增加角色、权限表，进而对方法或者页面标签元素进行权限控制。
 
 ## 配置文件
-配置：sql文件是在config目录下的cuc_web.sql，数据库密码在jdbc.properties中修改。
+配置：sql文件是在config目录下的cuc_web.sql，数据库密码在jdbc.properties中修改，初始用户名：李四，密码：123456。
 
 ## 爬虫相关
 具体爬虫框架可查看webmagic，JubiPageprocessor为数据获取的部分
