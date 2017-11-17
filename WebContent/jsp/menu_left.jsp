@@ -6,19 +6,24 @@
 				<div class="panel-group" id="panel-241717">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-241717" href="#panel-element-636296">后台管理</a>
+							<a class="panel-title collapsed" data-toggle="" data-parent="#panel-241717" href="#panel-element-636296">后台管理</a>
 						</div>
-						<div id="panel-element-636296" class="panel-collapse collapse">
+						<div id="panel-element-636296" class="panel-collapse ">
 							<div class="panel-body"><a href="${pageContext.request.contextPath }/index">用户管理</a></div>
 						</div>
+						
 					</div>
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-241717" href="#panel-element-898159">用户中心</a>
+							<a class="panel-title collapsed" data-toggle="" data-parent="#panel-241717" href="#panel-element-898159#panel-element-8981343">用户中心</a>
 						</div>
-						<div id="panel-element-898159" class="panel-collapse collapse">
+						<div id="panel-element-898159" class="panel-collapse">
 							<div class="panel-body"><a href="${pageContext.request.contextPath }/chart">模拟数据</a></div>
 						</div>
+						<div id="panel-element-8981343" class="panel-collapse">
+							<div class="panel-body"><a href="${pageContext.request.contextPath }/chart">模拟数据2</a></div>
+						</div>
+						
 						
 					</div>
 					
